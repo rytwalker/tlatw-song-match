@@ -6,10 +6,24 @@ type Props = {
   title: string;
   min?: number;
   max?: number;
+  isRange?: boolean;
+  value?: string | number | number[] | string[];
+  handleChange?: (field: string, newValue: any) => void;
 };
 
-function Slider({ title, min = 0, max = 100 }: Props) {
-  const [value, setValue] = useState(min);
+function Slider({
+  title,
+  min = 0,
+  max = 100,
+  isRange = false,
+  value,
+  handleChange,
+}: Props) {
+  const [sliderValue, setSliderValue] = useState(value);
+  function changeHandler(val) {
+    setSliderValue(val);
+    handleChange(title, val);
+  }
   const Track = (props, state) => (
     <StyledTrack {...props} index={state.index} />
   );
@@ -18,15 +32,20 @@ function Slider({ title, min = 0, max = 100 }: Props) {
   return (
     <Container>
       <h3>
-        {title}: <span>{value}</span>
+        {title}:{" "}
+        <span>
+          {isRange ? sliderValue[0] + " - " + sliderValue[1] : sliderValue}
+        </span>
       </h3>
       <StyledSlider
         min={min}
         max={max}
-        defaultValue={min}
+        defaultValue={sliderValue}
         renderTrack={Track}
         renderThumb={Thumb}
-        onChange={(val) => setValue(val)}
+        onChange={(val) => changeHandler(val)}
+        pearling={isRange}
+        minDistance={10}
       />
       <Labels>
         <Label>{min}</Label>
