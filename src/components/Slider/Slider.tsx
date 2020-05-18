@@ -58,12 +58,12 @@ function Slider({
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.textColor};
 
   h3 {
-    margin: 0 0 1rem;
+    margin: 0 0 10px;
     text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: ${({ theme }) => theme.typeScale.heading3};
   }
 `;
 
@@ -81,22 +81,22 @@ const StyledThumb = styled.div`
   line-height: 25px;
   border-radius: 50%;
   cursor: grab;
-  background: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.textColor};
+  color: ${({ theme }) => theme.primary};
 `;
 
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
   background: ${({ index, theme }) =>
-    index === 1 ? "#c5c5c5" : theme.colors.white};
+    index === 1 ? theme.colors.lightGrey : theme.textColor};
 `;
 
 const Labels = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 20px;
 `;
 
 const Label = styled.div`

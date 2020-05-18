@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import { normalize } from "polished";
 
 export const GlobalStyles = createGlobalStyle`
+  ${normalize}
+
   html {
     box-sizing: border-box;
   }
@@ -11,17 +14,13 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: inherit;
   }
 
-  html {
-    font-size: 62.5%;
-  }
-
   body {
-    background: ${({ theme }: any) => theme.colors.primary};
-    color: ${({ theme }) => theme.text};
-    font-size: 1.6rem;
+    background: ${({ theme }: any) => theme.primary};
+    color: ${({ theme }) => theme.textColor};
+    font-size: ${({ theme }) => theme.typeScale.paragraph};
     margin: 0;
     padding: 0;
-    font-family: 'Rubik', sans-serif;
+    font-family: ${({ theme }) => theme.primaryFont};
     transition: all 0.25s linear;
   }
   `;

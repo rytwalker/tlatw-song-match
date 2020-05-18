@@ -1,14 +1,37 @@
 import styled from "styled-components";
+import axios from "axios";
 import Slider from "./Slider/Slider";
 import Select from "./Select/Select";
+import { PrimaryButton } from "./Button/Button";
 import { useSongMatch } from "../context/SongMatchContext";
 import { KEYS, MODES } from "../constants";
 function SongMatchForm() {
   const { songMatchValues, setSongMatchValues } = useSongMatch();
 
-  function handleSubmit(e) {
+  function covnvertValuesToDecimals(values) {
+    return {
+      energy: values.energy / 100,
+      danceability: values.danceability / 100,
+      instrumentalness: values.instrumentalness / 100,
+      happiness: values.happiness / 100,
+      acousticness: values.acousticness / 100,
+      tempo: values.tempo,
+      keys: values.key,
+      mode: values.mode,
+    };
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(songMatchValues);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/search",
+        covnvertValuesToDecimals(songMatchValues)
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.dir(error);
+    }
   }
 
   function handleChange(field, newValue) {
@@ -19,7 +42,7 @@ function SongMatchForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ marginBottom: "3rem" }}>
       <Sliders>
         <Slider
           title="energy"
@@ -54,10 +77,10 @@ function SongMatchForm() {
           value={songMatchValues.acousticness}
           handleChange={handleChange}
         />
-        <Select options={KEYS} title="key" />
-        <Select options={MODES} title="mode" />
+        <Select options={KEYS} title="key" handleChange={handleChange} />
+        <Select options={MODES} title="mode" handleChange={handleChange} />
       </Sliders>
-      <SubmitButton type="submit">Submit</SubmitButton>
+      <PrimaryButton type="submit">Submit</PrimaryButton>
     </form>
   );
 }
@@ -65,28 +88,10 @@ function SongMatchForm() {
 const Sliders = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 2rem;
-  margin-bottom: 3rem;
+  grid-gap: 20px;
+  margin-bottom: 30px;
   @media (min-width: 769px) {
-    grid-gap: 6rem;
-  }
-`;
-
-const SubmitButton = styled.button`
-  background: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 2.4rem;
-  padding: 1rem 2rem;
-  text-transform: uppercase;
-  border: transparent;
-  border-radius: 4px;
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-  width: 100%;
-
-  @media (min-width: 769px) {
-    width: auto;
+    grid-gap: 60px;
   }
 `;
 

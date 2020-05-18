@@ -1,14 +1,12 @@
 // import App from "next/app";
 import { ThemeProvider } from "styled-components";
 import useDarkMode from "use-dark-mode";
-import { lightTheme, darkTheme } from "../styles/theme";
+import { redTheme } from "../styles/theme";
 import { GlobalStyles } from "../styles/global";
 
 function MyApp({ Component, pageProps }: any) {
-  const darkMode = useDarkMode(false);
-
   return (
-    <ThemeProvider theme={darkMode.value ? darkTheme : lightTheme}>
+    <ThemeProvider theme={redTheme}>
       <GlobalStyles />
       <Component {...pageProps} />
     </ThemeProvider>

@@ -1,3 +1,6 @@
+import { red, neutral } from "./colors";
+import { primaryFont, typeScale } from "./typography";
+
 export const light = {
   body: "#fafafa",
   text: "##171717",
@@ -18,14 +21,29 @@ export const dark = {
   accentColor: "#FFC424",
 };
 
+const redThemeColors = {
+  primary: red[300],
+  primaryHover: red[400],
+  primaryActive: red[200],
+  textColor: neutral[100],
+  textColorInverted: neutral[500],
+  disabled: neutral[300],
+  disabledText: neutral[400],
+};
+
 const defaultTheme = {
+  primaryFont,
+  typeScale,
   colors: {
-    primary: "#FF6B6B",
-    white: "#fafafa",
-    black: "#171717",
-    darkGrey: "#414245",
+    primary: red[300],
+    white: neutral[100],
+    black: neutral[500],
+    grey: neutral[300],
+    lightGrey: neutral[200],
+    darkGrey: neutral[400],
   },
 };
 
 export const lightTheme = { ...defaultTheme, ...light };
 export const darkTheme = { ...defaultTheme, ...dark };
+export const redTheme = { ...defaultTheme, ...redThemeColors };

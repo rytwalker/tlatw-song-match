@@ -23,8 +23,8 @@ const defaultState: SongMatchProps = {
   happiness: 0,
   acousticness: 0,
   tempo: [80, 180],
-  key: [],
-  mode: [],
+  key: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  mode: [0, 1],
 };
 
 export const SongMatchContext = createContext({

@@ -2,8 +2,20 @@ import { useState } from "react";
 import styled from "styled-components";
 import Select from "react-select";
 
-function MySelect({ options, title }) {
+function MySelect({ options, title, handleChange }) {
   const [selectValue, setSelectValue] = useState(options[0]);
+
+  function setFormValue(values = null) {
+    if (values) {
+      handleChange(
+        title,
+        values.map((v) => v.value)
+      );
+    } else {
+      // default to all keys
+      handleChange(title, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    }
+  }
 
   function setValue(value, actions) {
     switch (actions.action) {
@@ -12,29 +24,34 @@ function MySelect({ options, title }) {
           setSelectValue([
             { label: actions.option.label, value: actions.option.value },
           ]);
+          setFormValue();
           return;
-        } else {
-          if (value[0].label === "ANY") {
-            setSelectValue([...value.slice(1)]);
-            return;
-          }
-          setSelectValue(value);
+        } else if (value[0].label === "ANY") {
+          setSelectValue([...value.slice(1)]);
+          setFormValue(value.slice(1));
           return;
         }
+        setSelectValue(value);
+        setFormValue(value);
+        return;
       case "clear":
         setSelectValue([{ label: options[0].label, value: options[0].value }]);
+        setFormValue();
         return;
       case "remove-value":
         if (actions.removedValue.label === "ANY" || !value) {
           setSelectValue([
             { label: options[0].label, value: options[0].value },
           ]);
+          setFormValue();
           return;
         }
         setSelectValue(value);
+        setFormValue(value);
         return;
       default:
         setSelectValue(value);
+        setFormValue(value);
         break;
     }
   }
@@ -44,10 +61,13 @@ function MySelect({ options, title }) {
       <Select
         options={options}
         onChange={(value, actions) => setValue(value, actions)}
-        name="hello"
+        name={title}
         isMulti
         defaultValue={selectValue}
         value={selectValue}
+        theme={(theme) => ({
+          ...theme,
+        })}
       />
     </Container>
   );
@@ -60,8 +80,8 @@ const Container = styled.div`
   h3 {
     margin: 0 0 1rem;
     text-transform: uppercase;
-    font-size: 1.8rem;
-    color: ${({ theme }) => theme.colors.white};
+    font-size: ${({ theme }) => theme.typeScale.heading3};
+    color: ${({ theme }) => theme.textColor};
   }
 `;
 
