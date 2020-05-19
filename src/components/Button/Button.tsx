@@ -22,13 +22,20 @@ export const PrimaryButton = styled(Button)`
 `;
 
 export const RoundButton = styled(Button)`
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border: transparent;
   border-radius: 50%;
+  margin: 0;
+  padding: 0;
   margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.primary};
+
+  @media (min-width: 500px) {
+    height: 100px;
+    width: 100px;
+  }
 `;

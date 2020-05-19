@@ -1,6 +1,6 @@
 export const SpotifyIcon = ({
-  width = 22,
-  height = 22,
+  width = 16,
+  height = 16,
   color = "#eee",
   isActive = false,
 }) => {
