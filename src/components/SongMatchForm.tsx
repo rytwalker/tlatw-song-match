@@ -38,10 +38,10 @@ function SongMatchForm({ setResults }) {
       const newSongs = response.data.tracks.slice(0, 10).map((song) => {
         return {
           name: song.name,
-          album: "Mont Royal",
+          album: song.album.name,
           previewUrl: song.previewUrl,
           spotifyUrl: song.spotifyUrl,
-          albumThumbnail: "one sec",
+          albumThumbnail: song.album.smallImageUrl,
           id: song.spotifyId,
         };
       });

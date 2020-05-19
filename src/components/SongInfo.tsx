@@ -1,12 +1,25 @@
+import { useState, useRef } from "react";
 import styled from "styled-components";
+import ReactAudioPlayer from "react-audio-player";
 import { useSongs } from "../context/SongContext";
 import { RoundButton } from "../components/Button/Button";
 import { PlayIcon } from "../components/icons/PlayIcon";
 import { SpotifyIcon } from "../components/icons/SpotifyIcon";
 
 function SongInfo() {
+  const [playing, setPlaying] = useState(false);
+  const ref = useRef();
   const { songs } = useSongs();
   console.log(songs);
+  console.log(ref);
+  function playSample() {
+    if (playing) {
+      ref!.current.audioEl?.current.pause();
+    } else {
+      ref!.current.audioEl?.current.play();
+    }
+    setPlaying(!playing);
+  }
   return (
     <>
       {songs &&
@@ -14,7 +27,9 @@ function SongInfo() {
           <OuterWrapper key={song.id}>
             <Ranking>{index + 1}.</Ranking>
             <Container>
-              <ArtworkContainer></ArtworkContainer>
+              <ArtworkContainer
+                background={song.albumThumbnail}
+              ></ArtworkContainer>
               <SongInformation>
                 <h3>{song.name}</h3>
                 <h4>THE LIGHTHOUSE AND THE WHALER</h4>
@@ -24,7 +39,12 @@ function SongInfo() {
                   <div>Listen on Spotify</div>
                 </ListenOnSpotify>
               </SongInformation>
-              <RoundButton>
+              <RoundButton onClick={playSample}>
+                <ReactAudioPlayer
+                  src={song.previewUrl}
+                  autoPlay={playing}
+                  ref={ref}
+                />
                 <PlayIcon />
               </RoundButton>
             </Container>
@@ -63,7 +83,10 @@ const Container = styled.div`
 const ArtworkContainer = styled.div`
   height: 100px;
   width: 100px;
-  background: #c4c4c4;
+  background-color: #c4c4c4;
+  background-image: ${({ background }) => `url(${background})`};
+  background-size: cover;
+  background-position: center;
   margin-right: 1.8rem;
 `;
 
