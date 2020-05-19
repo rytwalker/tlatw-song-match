@@ -11,6 +11,12 @@ export default function Header() {
 
 const StyledHeader = styled.header`
   text-align: center;
-  margin: 2rem 0 4rem;
+  padding: 2rem 0 4rem;
   width: 100%;
+  z-index: 1000;
+  background: ${({ theme }) => theme.primary};
+
+  /* display: fixed; */
+  width: 100%;
+  height: auto;
 `;

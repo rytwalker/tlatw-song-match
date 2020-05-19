@@ -1,52 +1,70 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useTransition, animated, config } from "react-spring";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Logo from "../components/Logo";
 import { SongMatchProvider } from "../context/SongMatchContext";
 import SongMatchForm from "../components/SongMatchForm";
 import SongInfo from "../components/SongInfo";
+import { SongProvider } from "../context/SongContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1500);
-  // }, []);
+  const [results, setResults] = useState(false);
+  const transition = useTransition(results, null, {
+    from: {
+      opacity: 0,
+      position: "absolute",
+      transform: "translateY(200%)",
+      zIndex: -1,
+    },
+    enter: { opacity: 1, transform: "translateY(0)" },
+    leave: { opacity: 0, transform: "translateY(-200%)" },
+    config: config.slow,
+  });
   return (
     <SongMatchProvider>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {loading ? (
-        <LoadingContainer>
-          <Logo opacity />
-        </LoadingContainer>
-      ) : (
-        <Layout>
-          <main>
-            <Heading>
-              THE LIGHTHOUSE AND THE WHALER <span>SONG MATCH</span>
-            </Heading>
-            <SongMatchForm />
-            <SongInfoContainer>
-              <SongInfo />
-              <SongInfo />
-              <SongInfo />
-              <SongInfo />
-              <SongInfo />
-            </SongInfoContainer>
-          </main>
-        </Layout>
-      )}
+      <SongProvider>
+        <Head>
+          <title>Create Next App</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {loading ? (
+          <LoadingContainer>
+            <Logo opacity />
+          </LoadingContainer>
+        ) : (
+          <Layout>
+            <Main>
+              {transition.map(({ item, props, key }) => {
+                return item ? (
+                  <AnimatedContainer style={props} key={key}>
+                    <SongInfo />
+                  </AnimatedContainer>
+                ) : (
+                  <AnimatedContainer style={props} key={key}>
+                    <Heading>
+                      THE LIGHTHOUSE AND THE WHALER <span>SONG MATCH</span>
+                    </Heading>
+                    <SongMatchForm setResults={setResults} />
+                  </AnimatedContainer>
+                );
+              })}
+            </Main>
+          </Layout>
+        )}
+      </SongProvider>
     </SongMatchProvider>
   );
 }
-const SongInfoContainer = styled.div`
-  margin: 30px auto;
+
+const Main = styled.main`
+  position: relative;
+`;
+
+const AnimatedContainer = styled(animated.div)`
+  margin: 0 auto;
   width: 100%;
 `;
 const Heading = styled.h1`

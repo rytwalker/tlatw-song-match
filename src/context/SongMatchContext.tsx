@@ -16,25 +16,27 @@ interface SMContext {
   setSongMatchValues?: (songMatchValues: SongMatchProps) => void;
 }
 
-const defaultState: SongMatchProps = {
-  energy: 0,
-  danceability: 0,
-  instrumentalness: 0,
-  happiness: 0,
-  acousticness: 0,
-  tempo: [80, 180],
-  key: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  mode: [0, 1],
+const defaultState: SMContext = {
+  songMatchValues: {
+    energy: 0,
+    danceability: 0,
+    instrumentalness: 0,
+    happiness: 0,
+    acousticness: 0,
+    tempo: [80, 180],
+    key: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    mode: [0, 1],
+  },
 };
 
-export const SongMatchContext = createContext({
-  songMatchValues: defaultState,
-});
+export const SongMatchContext = createContext(defaultState);
 
 export const useSongMatch = () => useContext(SongMatchContext);
 
 export const SongMatchProvider: React.FC = ({ children }) => {
-  const [songMatchValues, setSongMatchValues] = useState(defaultState);
+  const [songMatchValues, setSongMatchValues] = useState(
+    defaultState.songMatchValues
+  );
   const value = useMemo(() => ({ songMatchValues, setSongMatchValues }), [
     songMatchValues,
     setSongMatchValues,

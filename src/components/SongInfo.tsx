@@ -1,28 +1,36 @@
 import styled from "styled-components";
+import { useSongs } from "../context/SongContext";
 import { RoundButton } from "../components/Button/Button";
 import { PlayIcon } from "../components/icons/PlayIcon";
 import { SpotifyIcon } from "../components/icons/SpotifyIcon";
 
 function SongInfo() {
+  const { songs } = useSongs();
+  console.log(songs);
   return (
-    <OuterWrapper>
-      <Ranking>1.</Ranking>
-      <Container>
-        <ArtworkContainer></ArtworkContainer>
-        <SongInformation>
-          <h3>CLOSER</h3>
-          <h4>THE LIGHTHOUSE AND THE WHALER</h4>
-          <h4>MONT ROYAL</h4>
-          <ListenOnSpotify>
-            <SpotifyIcon />
-            <div>Listen on Spotify</div>
-          </ListenOnSpotify>
-        </SongInformation>
-        <RoundButton>
-          <PlayIcon />
-        </RoundButton>
-      </Container>
-    </OuterWrapper>
+    <>
+      {songs &&
+        songs.map((song, index) => (
+          <OuterWrapper key={song.id}>
+            <Ranking>{index + 1}.</Ranking>
+            <Container>
+              <ArtworkContainer></ArtworkContainer>
+              <SongInformation>
+                <h3>{song.name}</h3>
+                <h4>THE LIGHTHOUSE AND THE WHALER</h4>
+                <h4>{song.album}</h4>
+                <ListenOnSpotify>
+                  <SpotifyIcon />
+                  <div>Listen on Spotify</div>
+                </ListenOnSpotify>
+              </SongInformation>
+              <RoundButton>
+                <PlayIcon />
+              </RoundButton>
+            </Container>
+          </OuterWrapper>
+        ))}
+    </>
   );
 }
 
