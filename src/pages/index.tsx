@@ -17,12 +17,13 @@ export default function Home() {
       opacity: 0,
       position: "absolute",
       transform: "translateY(200%)",
-      zIndex: -1,
+      zIndex: 1,
     },
     enter: { opacity: 1, transform: "translateY(0)" },
     leave: { opacity: 0, transform: "translateY(-200%)" },
     config: config.slow,
   });
+
   return (
     <SongMatchProvider>
       <SongProvider>
@@ -44,9 +45,9 @@ export default function Home() {
                   </AnimatedContainer>
                 ) : (
                   <AnimatedContainer style={props} key={key}>
-                    <Heading>
+                    {/* <Heading>
                       THE LIGHTHOUSE AND THE WHALER <span>SONG MATCH</span>
-                    </Heading>
+                    </Heading> */}
                     <SongMatchForm setResults={setResults} />
                   </AnimatedContainer>
                 );
@@ -61,12 +62,14 @@ export default function Home() {
 
 const Main = styled.main`
   position: relative;
+  min-height: 80vh;
 `;
 
 const AnimatedContainer = styled(animated.div)`
   margin: 0 auto;
   width: 100%;
 `;
+
 const Heading = styled.h1`
   color: ${({ theme }) => theme.colors.white};
   margin: 0 0 40px;

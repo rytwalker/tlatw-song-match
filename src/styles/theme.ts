@@ -23,7 +23,7 @@ export const dark = {
 
 const redThemeColors = {
   primary: red[300],
-  primaryHover: red[400],
+  primaryHover: red[200],
   primaryActive: red[200],
   textColor: neutral[100],
   textColorInverted: neutral[500],

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
     <Container>
       <Header />
       {children}
+      <Footer />
     </Container>
   );
 }

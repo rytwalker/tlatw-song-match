@@ -65,9 +65,6 @@ function MySelect({ options, title, handleChange }) {
         isMulti
         defaultValue={selectValue}
         value={selectValue}
-        theme={(theme) => ({
-          ...theme,
-        })}
       />
     </Container>
   );
@@ -76,6 +73,7 @@ function MySelect({ options, title, handleChange }) {
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
+  color: ${({ theme }) => theme.textColorInverted};
 
   h3 {
     margin: 0 0 1rem;

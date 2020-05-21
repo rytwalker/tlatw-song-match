@@ -10,6 +10,7 @@ const Button = styled.button`
   font-family: inherit;
   width: 100%;
   cursor: pointer;
+  transition: all 0.2s;
 
   @media (min-width: 769px) {
     width: auto;
@@ -17,7 +18,7 @@ const Button = styled.button`
 `;
 
 export const PrimaryButton = styled(Button)`
-  background: ${({ theme }) => theme.textColor};
+  background-color: ${({ theme }) => theme.textColor};
   color: ${({ theme }) => theme.primary};
 `;
 
@@ -32,7 +33,12 @@ export const RoundButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.primary};
+  background-color: ${({ theme }) => theme.primary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.primaryHover};
+    color: ${({ theme }) => theme.primary};
+  }
 
   @media (min-width: 500px) {
     height: 100px;

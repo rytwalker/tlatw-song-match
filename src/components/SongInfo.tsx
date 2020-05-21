@@ -1,28 +1,14 @@
-import { useState, useRef } from "react";
 import styled from "styled-components";
-import ReactAudioPlayer from "react-audio-player";
+import AudioPlayer from "./AudioPlayer";
 import { useSongs } from "../context/SongContext";
-import { RoundButton } from "../components/Button/Button";
-import { PlayIcon } from "../components/icons/PlayIcon";
 import { SpotifyIcon } from "../components/icons/SpotifyIcon";
 
 function SongInfo() {
-  const [playing, setPlaying] = useState(false);
-  const ref = useRef();
   const { songs } = useSongs();
-  console.log(songs);
-  console.log(ref);
-  function playSample() {
-    if (playing) {
-      ref!.current.audioEl?.current.pause();
-    } else {
-      ref!.current.audioEl?.current.play();
-    }
-    setPlaying(!playing);
-  }
+
   return (
     <>
-      {songs &&
+      {songs && songs.length ? (
         songs.map((song) => (
           <Container key={song.id}>
             <ArtworkContainer
@@ -37,16 +23,15 @@ function SongInfo() {
                 <div>Listen on Spotify</div>
               </ListenOnSpotify>
             </SongInformation>
-            <RoundButton onClick={playSample}>
-              <ReactAudioPlayer
-                src={song.previewUrl}
-                autoPlay={playing}
-                ref={ref}
-              />
-              <Play />
-            </RoundButton>
+            <AudioPlayer url={song.previewUrl} id={song.id} />
           </Container>
-        ))}
+        ))
+      ) : (
+        <div>
+          Ah that's crazy... no songs match those parameters. Maybe try
+          something less exotic, radiohead 😉
+        </div>
+      )}
     </>
   );
 }
@@ -62,6 +47,8 @@ const Container = styled.div`
   align-items: center;
   padding: 16px 8px;
   margin: 0 auto 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15),
+    0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15);
 
   @media (min-width: 768px) {
     height: 140px;
@@ -91,16 +78,16 @@ const SongInformation = styled.div`
   flex-direction: column;
   h3 {
     margin: 0 0 2px;
-    font-size: ${({ theme }) => theme.typeScale.helperText};
+    font-size: ${({ theme }) => theme.typeScale.copyrightText};
 
     @media (min-width: 768px) {
-      font-size: ${({ theme }) => theme.typeScale.p};
+      font-size: ${({ theme }) => theme.typeScale.paragraph};
     }
   }
 
   h4 {
     margin: 0;
-    font-size: ${({ theme }) => theme.typeScale.copyrightText};
+    font-size: ${({ theme }) => theme.typeScale.finePrint};
 
     @media (min-width: 768px) {
       font-size: ${({ theme }) => theme.typeScale.helperText};
@@ -134,16 +121,6 @@ const ListenOnSpotify = styled.a`
       width: 22px;
       height: 22px;
     }
-  }
-`;
-
-const Play = styled(PlayIcon)`
-  border: 1px solid black;
-  height: 40px;
-  width: 40px;
-  svg {
-    height: 40px;
-    width: 40px;
   }
 `;
 
