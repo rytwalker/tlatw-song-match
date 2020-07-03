@@ -30,7 +30,11 @@ export default function Home() {
     <SongMatchProvider>
       <SongProvider>
         <Head>
-          <title>Create Next App</title>
+          <title>The Lighthouse and the Whaler Song Match</title>
+          <meta
+            name="description"
+            content="Find your favorite The Lighthouse and the Whaler song based on parameters provided by Spotify."
+          />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {loading ? (
