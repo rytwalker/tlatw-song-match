@@ -1,12 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import SocialNav from "./SocialNav";
 
 function Footer() {
   return (
     <StyledFooter>
-      <nav>Social Nav</nav>
+      <SocialNav />
       <div>© 2020 The Lighthouse and the Whaler</div>
     </StyledFooter>
-  )
+  );
 }
 
 const StyledFooter = styled.footer`
