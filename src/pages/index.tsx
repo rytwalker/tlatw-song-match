@@ -8,6 +8,8 @@ import { SongMatchProvider } from "../context/SongMatchContext";
 import SongMatchForm from "../components/SongMatchForm";
 import SongInfo from "../components/SongInfo";
 import { SongProvider } from "../context/SongContext";
+import AnimatedLayout from "../components/AnimatedLayout";
+import Modal from "../components/Modal/Modal";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -40,16 +42,16 @@ export default function Home() {
             <Main>
               {transition.map(({ item, props, key }) => {
                 return item ? (
-                  <AnimatedContainer style={props} key={key}>
+                  <AnimatedLayout style={props} key={key}>
                     <SongInfo />
-                  </AnimatedContainer>
+                  </AnimatedLayout>
                 ) : (
-                  <AnimatedContainer style={props} key={key}>
+                  <AnimatedLayout style={props} key={key}>
                     {/* <Heading>
                       THE LIGHTHOUSE AND THE WHALER <span>SONG MATCH</span>
                     </Heading> */}
                     <SongMatchForm setResults={setResults} />
-                  </AnimatedContainer>
+                  </AnimatedLayout>
                 );
               })}
             </Main>

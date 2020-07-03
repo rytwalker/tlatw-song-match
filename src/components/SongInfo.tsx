@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import styled from "styled-components";
 import AudioPlayer from "./AudioPlayer";
 import { useSongs } from "../context/SongContext";
@@ -6,8 +7,15 @@ import { SpotifyIcon } from "../components/icons/SpotifyIcon";
 function SongInfo() {
   const { songs } = useSongs();
 
+  const [currentTrackId, setCurrentTrackId] = useState(null);
+
+  function handlePlayButtonClick() {
+
+  }
+
   return (
     <>
+      Here's the top songs that match:
       {songs && songs.length ? (
         songs.map((song) => (
           <Container key={song.id}>
@@ -23,7 +31,7 @@ function SongInfo() {
                 <div>Listen on Spotify</div>
               </ListenOnSpotify>
             </SongInformation>
-            <AudioPlayer url={song.previewUrl} id={song.id} />
+            <AudioPlayer url={song.previewUrl} id={song.id} currentTrackId={currentTrackId} setCurrentTrackId={setCurrentTrackId}/>
           </Container>
         ))
       ) : (

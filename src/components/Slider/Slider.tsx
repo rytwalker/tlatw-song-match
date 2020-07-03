@@ -71,6 +71,7 @@ const StyledSlider = styled(ReactSlider)`
   width: 100%;
   height: 8px;
   position: relative;
+  /* z-index: -1000; */
 `;
 
 const StyledThumb = styled.div`
