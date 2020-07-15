@@ -10,7 +10,6 @@ function SongInfo() {
 
   return (
     <>
-      Here's the top songs that match:
       {songs && songs.length ? (
         songs.map((song) => (
           <Container key={song.id}>

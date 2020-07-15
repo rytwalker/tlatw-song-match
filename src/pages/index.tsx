@@ -10,6 +10,7 @@ import SongInfo from "../components/SongInfo";
 import { SongProvider } from "../context/SongContext";
 import AnimatedLayout from "../components/AnimatedLayout";
 import Modal from "../components/Modal/Modal";
+import { PrimaryButton } from "../components/Button/Button";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -47,10 +48,21 @@ export default function Home() {
               {transition.map(({ item, props, key }) => {
                 return item ? (
                   <AnimatedLayout style={props} key={key}>
+                    <Instructions>
+                      <PrimaryButton onClick={() => setResults(false)}>
+                        back
+                      </PrimaryButton>
+                    </Instructions>
                     <SongInfo />
                   </AnimatedLayout>
                 ) : (
                   <AnimatedLayout style={props} key={key}>
+                    <Instructions>
+                      <p>Instructions: </p>
+                      <p>1. move the sliders to your desired preferences</p>
+                      <p>2. select specific keys and/or modes</p>
+                      <p>3. hit submit to process your results</p>
+                    </Instructions>
                     {/* <Heading>
                       THE LIGHTHOUSE AND THE WHALER <span>SONG MATCH</span>
                     </Heading> */}
@@ -96,4 +108,13 @@ const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Instructions = styled.div`
+  padding: 24px 0;
+
+  p {
+    margin: 0 0 8px;
+    padding: 0;
+  }
 `;

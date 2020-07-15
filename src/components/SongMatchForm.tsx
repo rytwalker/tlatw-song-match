@@ -50,7 +50,7 @@ function SongMatchForm({ setResults }) {
           id: song.spotifyId,
         };
       });
-      console.log(response.data);
+      // console.log(response.data);
       setSongs(newSongs);
       setTimeout(() => {
         setResults(true);
