@@ -6,7 +6,7 @@ function Footer() {
     <StyledFooter>
       <SocialNav />
       <WebsiteLink href="thelighthouseandthewhaler.com" rel="nofollow noref">thelighthouseandthewhaler.com</WebsiteLink>
-      <div>© 2020 The Lighthouse and the Whaler</div>
+      <div>© 2022 The Lighthouse and the Whaler</div>
     </StyledFooter>
   );
 }
