@@ -1,5 +1,5 @@
-const BaseModel = require("./BaseModel");
-const jsonfile = require("jsonfile");
+import jsonfile from "jsonfile";
+import readJsonFile from "../utils/readJsonFile";
 
 const writeToJSONFile = async (obj) => {
   try {
@@ -20,16 +20,8 @@ const getAlbums = async () => {
 };
 
 class Album {
-  static async find(field = null) {
-    try {
-      if (field && field.id) {
-        // return await db("albums").where({ id: field.id }).first();
-      } else {
-        return await getAlbums();
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  static find() {
+    return readJsonFile("albums");
   }
 
   static async insert(albums) {

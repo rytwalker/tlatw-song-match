@@ -1,10 +1,10 @@
-const Track = require("../models/Track");
+import Track from "../../src/models/Track";
 
 export default function handler(_req, res) {
   try {
-    const tracks = await Track.findRaw();
+    const tracks = Track.findRaw();
     res.status(200).json({ tracks, length: tracks.length });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
   }
-};
+}

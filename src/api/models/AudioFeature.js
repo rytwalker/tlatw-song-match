@@ -1,19 +1,10 @@
-import BaseModel from "./BaseModel";
-
 import writeToJsonFile from "../utils/writeToJsonFile";
-
+import readJsonFile from "../utils/readJsonFile";
 class AudioFeature {
-  // static async find() {
-  //   try {
-  //     return await db("audio-features as af").join(
-  //       "tracks as t",
-  //       "t.id",
-  //       "af.trackId"
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  static find() {
+    return readJsonFile("audioFeatures");
+  }
+
   static insert(audioFeatures) {
     try {
       const jsonData = writeToJsonFile(audioFeatures, "audioFeatures");

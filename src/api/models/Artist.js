@@ -1,5 +1,5 @@
-const BaseModel = require("./BaseModel");
-const jsonfile = require("jsonfile");
+import jsonfile from "jsonfile";
+import readJsonFile from "../utils/readJsonFile";
 
 const writeToJSONFile = async (obj) => {
   try {
@@ -13,13 +13,9 @@ const writeToJSONFile = async (obj) => {
 };
 
 class Artist {
-  // static async find() {
-  //   try {
-  //     return await db("artists");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  static find() {
+    return readJsonFile("albums");
+  }
 
   static async insert({ name, spotifyId, spotifyUrl, followers }) {
     try {
