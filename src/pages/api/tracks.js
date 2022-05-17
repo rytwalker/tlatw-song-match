@@ -1,4 +1,4 @@
-import Track from "../../src/models/Track";
+import Track from "../../api/models/Track";
 
 export default function handler(_req, res) {
   try {
