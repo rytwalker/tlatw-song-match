@@ -32,13 +32,14 @@ function SongMatchForm({ setResults }) {
     e.preventDefault();
     try {
       setSubmitting(true);
-      const apiUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:4000/api/search"
-          : "https://ancient-chamber-37940.herokuapp.com/api/search";
+      const apiUrl = "api/search";
       const response = await axios.post(
         apiUrl,
         covnvertValuesToDecimals(songMatchValues)
+      );
+      console.log(
+        "🚀 ~ file: SongMatchForm.tsx ~ line 40 ~ handleSubmit ~ response",
+        response
       );
       const newSongs = response.data.tracks.slice(0, 10).map((song) => {
         return {

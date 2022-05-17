@@ -1,41 +1,21 @@
-export const red = {
-  100: "#FFC1B9",
-  200: "#FF8A7A",
-  300: "#fb4b4b",
-  400: "#B33939",
-  500: "#7A2424",
+export const pink = {
+  100: "#D488A2",
 };
 
 export const blue = {
-  100: "#B8E4FF",
-  200: "#88D1FF",
-  300: "#52BCFF",
-  400: "#23AAFF",
-  500: "#0082D4",
+  100: "#BEC3C8",
 };
 
 export const green = {
-  100: "#E2F4F2",
-  200: "#C2DEDA",
-  300: "#9BC1BC",
-  400: "#728F8B",
-  500: "#21423E",
+  100: "#7C8057",
 };
 
 export const yellow = {
-  100: "#FFFFF2",
-  200: "#FFFEBE",
-  300: "#FFFD85",
-  400: "#FFFB21",
-  500: "#F5F100",
+  100: "#E6D8AC",
 };
 
 export const orange = {
-  100: "#FFCFA4",
-  200: "#FFB775",
-  300: "#FE9B40",
-  400: "#FC8313",
-  500: "#EA6F00",
+  100: "#DBAE75",
 };
 
 export const purple = {
@@ -47,9 +27,9 @@ export const purple = {
 };
 
 export const neutral = {
-  100: "#FAFAFA",
-  200: "#DADADA",
-  300: "#A6A6A6",
-  400: "#5E5E5E",
-  500: "#191919",
+  100: "#fff",
+  200: "#E7E3DE",
+  300: "#C2C4BE",
+  400: "#5D5854",
+  500: "#090D0B",
 };
