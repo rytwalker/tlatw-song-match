@@ -1,13 +1,11 @@
-import jsonfile from "jsonfile";
+import trackData from '../data/data.json';
 
 const readJsonFile = (key) => {
-  const jsonFile = jsonfile.readFileSync("./src/api/data/data.json");
-  return jsonFile[key];
+  return trackData[key];
 };
 
 export const getAlbumsTracksAudioFeatures = () => {
-  const jsonFile = jsonfile.readFileSync("./src/api/data/data.json");
-  const { albums, tracks, audioFeatures } = jsonFile;
+  const { albums, tracks, audioFeatures } = trackData;
 
   return tracks.map((track) => {
     const trackAudioFeatures = audioFeatures.find(
