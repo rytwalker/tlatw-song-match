@@ -14,7 +14,7 @@ const writeToJSONFile = async (obj) => {
 
 class Artist {
   static find() {
-    return readJsonFile("albums");
+    return readJsonFile("artists");
   }
 
   static async insert({ name, spotifyId, spotifyUrl, followers }) {
